@@ -32,3 +32,26 @@ print("make corpus") # 말뭉치, 단어사전
 corpus = [dictionary.doc2bow(text) for text in texts]
 print('corpus : {}'.format(corpus))
 
+print("-"*80)
+print("create model")
+lda = models.ldamodel.LdaModel(corpus=corpus, id2word=dictionary, num_topics=2, random_state=1)
+print("sorting")
+for t in lda.show_topics():
+    print(t)
+
+print("visulization")
+import matplotlib.pyplot as plt
+from wordcloud import  WordCloud
+
+wc = WordCloud(background_color='white', font_path='C:/Windows/Fonts/malgun.ttf')
+
+plt.figure(figsize=(30,30))
+for t in range(lda.num_topics):
+    plt.subplot(4,4, t+1)
+    x = dict(lda.show_topic(t, 200))
+    im = wc.generate_from_frequencies(x)
+    plt.imshow(im)
+    plt.title("Topic # " + str(t))
+
+# save file
+plt.savefig('d:/ai/wc.png', bbox_inches='tight')
