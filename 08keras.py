@@ -14,8 +14,8 @@ y_test = to_categorical(y_test)
 
 print("2. ... Modeling ...")
 model = Sequential()
-model.add(Dense(units=64, input_dim=28 * 28, activation='relu'))
-model.add(Dense(units=10, activation='softmax'))
+model.add(Dense(units=64, input_dim=28 * 28, activation='relu'))  # O O O O O O ..... O O O O
+model.add(Dense(units=10, activation='softmax'))                  # O O O O ... O O
 
 print("3. ... Config Model Learning ...")
 model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
