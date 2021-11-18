@@ -21,8 +21,8 @@ def diff_ngram(sa, sb, num):
     return cnt/len(a), r
 
 print("test 01")
-a="오늘 강남에서 맛있는 스파게티를 먹었다."
-b="강남에서 먹었던 오늘의 스파게티는 맛있었다."
+a="오늘 강남에서 맛있는 스파게티를 먹었다. 오늘 기분 좋다"
+b="강남에서 먹었던 오늘의 스파게티는 맛있었다. 오늘의 일기 끝"
 
 print("bi-gram")
 r2, word2=diff_ngram(a, b, 2)
