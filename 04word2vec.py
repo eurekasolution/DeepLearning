@@ -13,3 +13,4 @@ for result in results:
 
 # 터미널에서 명령
 #  python 04word2vec.py d:/ai/text8.model
+# 크롤링..댓글, 영화 댓글,,
