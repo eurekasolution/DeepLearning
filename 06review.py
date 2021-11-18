@@ -12,3 +12,23 @@ def read_data(filename): # d:/ai/review.txt
     return data
 
 ratings_train = read_data("d:/ai/review.txt")
+tagger = Okt()
+
+def tokenize(doc):
+    return ['/'.join(t) for t in tagger.pos(doc, norm=True, stem=True)]
+
+docs = []
+for row in ratings_train:
+    docs.append(row[1])
+
+data = [tokenize(d) for d in docs]
+
+print("Creating model")
+model = word2vec.Word2Vec(data)
+
+model.init_sims(replace=True)
+
+# 남자 + 배우 - 여배우
+pprint(model.wv.most_similar(positive=tokenize(u'남자 배우'),
+                             negative=tokenize(u'여배우'),
+                             topn=10))
