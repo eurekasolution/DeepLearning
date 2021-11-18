@@ -11,4 +11,5 @@ print("result : woman + king - man")
 for result in results:
     print(result[0], '\t', result[1])
 
-
+# 터미널에서 명령
+#  python 04word2vec.py d:/ai/text8.model
