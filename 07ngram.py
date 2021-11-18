@@ -20,3 +20,14 @@ def diff_ngram(sa, sb, num):
                 r.append(i)
     return cnt/len(a), r
 
+print("test 01")
+a="오늘 강남에서 맛있는 스파게티를 먹었다."
+b="강남에서 먹었던 오늘의 스파게티는 맛있었다."
+
+print("bi-gram")
+r2, word2=diff_ngram(a, b, 2)
+print("bigram :", r2, word2)
+
+print("trigram")
+r3, word3=diff_ngram(a, b, 3)
+print("trigram :", r3, word3)
