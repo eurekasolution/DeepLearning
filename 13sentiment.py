@@ -73,7 +73,7 @@ model.add(LSTM(128,
 model.add(Dense(1, activation='sigmoid'))
 
 print("07 ... Compiling ")
-model.compile(loss='binaray-crossentropy',
+model.compile(loss='binary_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 print("08 ... Learning")
