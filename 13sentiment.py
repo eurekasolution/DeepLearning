@@ -62,3 +62,31 @@ x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
 x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
 print(x_train[0:5])
 print(y_train[0:5])
+
+print("06 ... Modeling")
+model = Sequential()
+model.add(Embedding(max_num_words, 128))
+model.add(LSTM(128,
+               dropout=0.2,
+               recurrent_dropout=0.2 ,
+               input_shape=(3,1)))
+model.add(Dense(1, activation='sigmoid'))
+
+print("07 ... Compiling ")
+model.compile(loss='binaray-crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+print("08 ... Learning")
+import numpy as np
+y_train = np.array(y_train)
+y_test = np.array(y_test)
+
+model.fit(x_train, y_train,
+          batch_size=batch_size,
+          epochs=15,
+          validation_data=(x_test, y_test))
+
+print("09 ... Evaluation")
+loss, acc = model.evaluate(x_test, y_test,batch_size=batch_size)
+print("loss : ", loss)
+print("acc : ", acc)
