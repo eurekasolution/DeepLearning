@@ -56,3 +56,9 @@ batch_size = 32
 print("04-1 ... Check Data")
 print(x_train[0:5])
 print(y_train[0:5])
+
+print("05 ... 단어길이 조정(100)")
+x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
+x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
+print(x_train[0:5])
+print(y_train[0:5])
