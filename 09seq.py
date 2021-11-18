@@ -18,12 +18,13 @@ mse = model.evaluate(x, y, batch_size=1)
 print('mse : ' , mse)
 
 # 할일
-# 1. 위 14라인 오타 수정
+# 1. 위 14라인 오타 수정 (lose -> loss)
 # 2. 에러 해결하기
 # 에러 메시지를 보면
 # Microsoft C++ Redistributable for Visual Studio 2015, 2017 and 2019"
 # 재배포 패키지가 설치되어야 합니다.
 # 배포해 드렸던 파일에 보면
 # 02-VC_redist.x64 가 있습니다. 이 글 보시면 설치해 주시고,
-# 설치후 컴퓨터가 Reboot이 필요합니다.
-
+# 설치후 컴퓨터가 Reboot이 필요합니다. <---- 설치후 Reboot 한 다음, 재접속하셔야 합니다
+# Git에 커밋해 놓았습니다.
+# 정상적이면 아래 실행창처럼 되어야 합니다.
