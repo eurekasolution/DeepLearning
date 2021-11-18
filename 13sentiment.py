@@ -34,3 +34,8 @@ def korean_movie(max_num_words=1000):
     # embedding
     tokenizer = Tokenizer(num_words=max_num_words)
     tokenizer.fit_on_texts(train_x)
+
+    token_train_x = tokenizer.texts_to_sequences(train_x)
+    token_test_x = tokenizer.texts_to_sequences(test_x)
+
+    return (token_train_x, train_y), (token_test_x, test_y)
