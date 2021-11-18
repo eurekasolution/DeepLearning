@@ -29,6 +29,8 @@ model = word2vec.Word2Vec(data)
 model.init_sims(replace=True)
 
 # 남자 + 배우 - 여배우
-pprint(model.wv.most_similar(positive=tokenize(u'남자 배우'),
-                             negative=tokenize(u'여배우'),
+#pprint(model.wv.most_similar(positive=tokenize(u'남자 배우'),
+#                             negative=tokenize(u'여배우'),
+#                             topn=10))
+pprint(model.wv.most_similar(positive=tokenize(u'정우성 조인성'),
                              topn=10))
