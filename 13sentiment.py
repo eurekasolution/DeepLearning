@@ -44,3 +44,15 @@ print("03 ... Analysis")
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Embedding, LSTM
+from tensorflow.keras.datasets import imdb
+
+print("04 ... Modeling")
+max_num_words = 5000
+maxlen = 100    # 문장의 최대 길이
+batch_size = 32
+
+(x_train, y_train), (x_test, y_test) = korean_movie(max_num_words)
+
+print("04-1 ... Check Data")
+print(x_train[0:5])
+print(y_train[0:5])
