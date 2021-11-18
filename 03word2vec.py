@@ -6,7 +6,7 @@ import sys
 
 print("time")
 #logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-print("read file from parameter")  # ./03word2vec.py text8.txt text8.model test
+print("read file from parameter")  # ./03word2vec.py d:/ai/text8.txt d:/ai/text8.model
 sentences = word2vec.LineSentence(sys.argv[1])
 
 model = word2vec.Word2Vec(sentences,
