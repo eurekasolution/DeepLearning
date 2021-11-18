@@ -22,11 +22,13 @@ model.add(Dense(5))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
-model.fit(x_train, y_train, epochs=100,batch_size=1)
+model.fit(x_train, y_train,
+          epochs=100,
+          batch_size=1,
+          validation_data=(x_val, y_val))
 
 loss, acc=model.evaluate(x_test,y_test,
-                         batch_size=1,
-                         validation_data=(x_val, y_val))
+                         batch_size=1)
 print('loss : ', loss)
 print('acc : ', acc)
 
