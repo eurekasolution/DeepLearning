@@ -39,3 +39,8 @@ def korean_movie(max_num_words=1000):
     token_test_x = tokenizer.texts_to_sequences(test_x)
 
     return (token_train_x, train_y), (token_test_x, test_y)
+
+print("03 ... Analysis")
+from tensorflow.keras.preprocessing import sequence
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.layers import Dense, Embedding, LSTM
