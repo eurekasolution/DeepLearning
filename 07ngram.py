@@ -28,6 +28,6 @@ print("bi-gram")
 r2, word2=diff_ngram(a, b, 2)
 print("bigram :", r2, word2)
 
-print("trigram")
+print("trigram") ###
 r3, word3=diff_ngram(a, b, 3)
 print("trigram :", r3, word3)
