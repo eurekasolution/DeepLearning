@@ -56,3 +56,8 @@ test['document'] = test['document'].str.replace("^ +", "", regex=True)
 test['document'] = test['document'].str.replace("  ", "", regex=True)
 test['document'].replace('', np.nan, inplace=True)
 print("정규식 제거후 데이터(Test) :", test[0:10])
+
+print("05... Tokenize") # 안중근 의사, "의 "
+# 학교 운동장에 학생(들)이 많이 있다.
+# There are students in ...
+stopwords = ['의', '가', '은', '는', '이', '들', '도', '좀', '잘', '걍', '으로', '로', '에', '와', '한', '하다']
