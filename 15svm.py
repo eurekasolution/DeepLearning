@@ -21,3 +21,5 @@ test = read_data("d:/ai/simple_test.txt")   # simple_test.txt
 classifier = SVC(C=0.5)
 training_points = [[1,2], [1,5], [2,2], [7,5], [9,4], [8,2]]
 labels = [1,1,1,0,0,0]
+classifier.fit(training_points, labels)
+print("classifier.predict(3,2) :", classifier.predict([[3,2]]))
