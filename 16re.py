@@ -225,6 +225,20 @@ sentiment_predict("부모님과는 보면 안될것 같은 영화")
 sentiment_predict("오~~")
 sentiment_predict("잘하는 짓이다")
 
+print("[13] 일괄 예측 .. From File")
+def read_data(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        result = [line.split('\t') for line in f.read().splitlines()]
+        result = result[1:] # 헤더 제외
+    return result
+
+ratings_test = read_data('d:/ai/ratings_test.txt')
+
+# id, review, level 중에서 review만 이용해 모든 리뷰 평가
+for row in ratings_test[:30]:
+    sentiment_predict(row[1])
+
+
 
 
 
