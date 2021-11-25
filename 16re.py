@@ -47,6 +47,7 @@ print("정규식 제거후 데이터 :", train[0:10])
 train['document'] = train['document'].str.replace("^ +", "", regex=True)
 train['document'] = train['document'].str.replace("  ", "", regex=True)
 train['document'].replace('', np.nan, inplace=True)
+train = train.dropna(how='any')
 
 test['document'] = test['document'].str.replace("[^가-힣ㄱ-ㅎㅏ-ㅣ ]", "", regex=True)
 test = test.dropna(how='any');
@@ -55,6 +56,7 @@ test = test.dropna(how='any');
 test['document'] = test['document'].str.replace("^ +", "", regex=True)
 test['document'] = test['document'].str.replace("  ", "", regex=True)
 test['document'].replace('', np.nan, inplace=True)
+test = test.dropna(how='any')
 print("정규식 제거후 데이터(Test) :", test[0:10])
 
 print("05... Tokenize") # 안중근 의사, "의 "
@@ -69,3 +71,5 @@ for sentence in tqdm(train['document']):
     stopwords_removed_sentence = [ word for word in tokenized_sentence if not word in stopwords]
     x_train.append(stopwords_removed_sentence)
 
+print("type(x_train) = ", type(x_train))
+print(x_train[0:10])
