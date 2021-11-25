@@ -98,3 +98,23 @@ y_test = np.array(y_test)
 print("5-8 y_train\n",y_train)
 print("5-9 y_test\n",y_test)
 
+print("Step 4. 모델 만들기")
+from tensorflow.keras.layers import Embedding, Dense, LSTM
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+max_len = 20
+x_train = pad_sequences(x_train, maxlen=max_len)
+x_test = pad_sequences(x_test, maxlen=max_len)
+
+model = Sequential()
+model.add(Embedding(max_words, 100))
+model.add(LSTM(128))
+model.add(Dense(3, activation='softmax'))
+
+model.compile(optimizer='adam',  #optimizer='rmsprop'
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+history = model.fit(x_train, y_train, epochs=10, batch_size=10, validation_split=0.1)
+
+print("\n6. 테스트 정확도 : {:.2f}%".format(model.evaluate(x_test, y_test)[1] * 100))
