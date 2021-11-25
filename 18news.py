@@ -36,3 +36,8 @@ for sentence in test_data['title']:
     temp_x = okt.morphs(sentence, stem=True)
     temp_x = [word for word in temp_x if not word in stopwords]
     x_test.append(temp_x)
+
+print("3. 토근화 확인")
+print("3-1. Train Data\n", x_train[:5])
+print("3-2. Test Data\n", x_test[:5])
+
