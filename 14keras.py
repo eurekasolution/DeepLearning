@@ -13,8 +13,8 @@ def read_data(filename):
 # 데이터의 예
 #id	document	label
 #9976970	아 더빙.. 진짜 짜증나네요 목소리	0
-#3819312	흠...포스터보고 초딩영화줄....오버연기조차 가볍지 않구나	1
-#10265843	너무재밓었다그래서보는것을추천한다	0
+#3819312	흠...포스보고 초딩영화줄....오버연기조차 가볍지 않구나	1
+#10265843	터너무재밓었다그래서보는것을추천한다	0
 
 print("01... 데이터 파일 읽기")
 train = read_data("d:/ai/ratings_train.txt")
@@ -38,7 +38,35 @@ test_pos = []
 
 for row in train:
     try:
-        train_pos0 =[tokenizing(row[1], row[2])]
+        train_pos0 =[tokenizing(row[1]), row[2]]
         train_pos.append(train_pos0)
     except:
         pass
+
+for row in test:
+    try:
+        test_pos0 =[tokenizing(row[1]), row[2]]
+        test_pos.append(test_pos0)
+    except:
+        pass
+
+pprint(train_pos[0])
+# [ ['아/감탄사', '더빙/명사', '../구둣점'] , [ ...], [... ] ]
+print("03... 데이터 전처리")
+tokens = [t for d in train_pos for t in d[0]]
+
+import nltk
+text = nltk.Text(tokens, name='NMSC')
+print("Length of text token : ", len(set(text.tokens))) # A,A, A, B, B, C => A, B, C
+text.vocab().most_common(10)
+print("top 10 list :", text.vocab().most_common(10)) # . 구둣점, 영화/명사
+
+print("04... 데이터 분포 확인")
+import matplotlib.pyplot as plt
+from matplotlib import font_manager, rc
+
+font_name ="C:/Windows/Fonts/malgun.ttf"
+font_name = font_manager.FontProperties(fname=font_name).get_name()
+plt.rc('font', family=font_name)
+plt.figure(figsize=(20, 20))
+text.plot(50)
