@@ -41,3 +41,15 @@ print("3. 토근화 확인")
 print("3-1. Train Data\n", x_train[:5])
 print("3-2. Test Data\n", x_test[:5])
 
+print("Step 3. 정수 인코딩")
+from tensorflow.keras.preprocessing.text import Tokenizer
+max_words = 50000
+tokenizer = Tokenizer(num_words = max_words)
+tokenizer.fit_on_texts(x_train)
+x_train = tokenizer.texts_to_sequences(x_train)
+x_test = tokenizer.texts_to_sequences(x_test)
+print("4. 정수화 데이터 확인")
+print("4-1. Train Data\n", x_train[:5])
+print("4-2. Test Data\n", x_test[:5])
+
+
