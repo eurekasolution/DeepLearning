@@ -70,3 +70,6 @@ font_name = font_manager.FontProperties(fname=font_name).get_name()
 #plt.rc('font', family=font_name)
 #plt.figure(figsize=(20, 20))
 #text.plot(50)
+
+print("05.. 단어 수를 제한")
+selected_words = [f[0] for f in text.vocab().most_common(1000)]
