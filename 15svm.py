@@ -60,3 +60,13 @@ print("06... Evaluate")
 classifier = SklearnClassifier(LinearSVC())
 classifier_svm = classifier.train(train_xy)
 print(nltk.classify.accuracy(classifier_svm, test_xy))
+
+# 정규식 (Regular Expression, RE, PCRE)
+# 패턴을 검사
+# [a-z], [a-zA-Z], [a-z\/]
+# 구둣점, !, #, $  : 제거
+# 가나다, ㅋㅋ, ㅠㅠ
+# 예: 아, 이 영화 !! 정말 짜증난다~~~~ ㅠㅠ
+# 필요한 단어: 아 이 영화 정말 짜증난다
+# [^a-zA-Z]
+# [^가-힣ㄱ-ㅎㅏ-ㅣ]
