@@ -192,6 +192,39 @@ history = model.fit(x_train, y_train, epochs=15,
                     batch_size=64,
                     validation_split=0.2)
 
+model.save("d:/ai/model/my_model")
+print("\nAccuracy: {:.4f}".format(model.evaluate(x_train, y_train)[1]))
+print("[11] 정확도 측정")
+loaded_model = load_model("e:/airesult/model/my_model")
+print("\n[테스트 정확도] : {:.4f} %".format((loaded_model.evaluate(x_test, y_test)[1])))
+
+print("[12] 리뷰 예측")
+def sentiment_predict(new_sentence):
+    org_sentence = new_sentence
+    new_sentence = re.sub(r'[^ㄱ-ㅎㅏ-ㅣ가-힣 ]', '', new_sentence)
+    new_sentence = okt.morphs(new_sentence, stem=True)      # Tokenize
+    new_sentence = [word for word in new_sentence if not word in stopwords]
+    encoded = tokenizer.texts_to_sequences([new_sentence])  # 정수 인코딩
+    pad_new = pad_sequences(encoded, maxlen=max_len)        # Padding
+    score = float(loaded_model.predict(pad_new))            # Predict
+    if(score > 0.5):
+        print("[{}] 긍정 리뷰 확률 {:.2f}%".format(org_sentence, score * 100))
+    else:
+        print("[{}] 부정 리뷰 확률 {:.2f}%".format(org_sentence, (1-score) * 100))
+
+print("[리뷰 예측 테스트]")
+sentiment_predict("주인공 연기 진짜 대단하다. ㅠㅠ")
+sentiment_predict("시간 남아도는 사람만 이 영화 보세요")
+sentiment_predict("각오하고 보니까 의외로 재미는 있다. 멋져버려")
+sentiment_predict("이건 아니지")
+sentiment_predict("다시 또 보고 싶은 영화")
+sentiment_predict("재미있을까? 아직은 모르겠다.")
+sentiment_predict("ㅠㅠ")
+sentiment_predict("웃겨 죽는줄 알았다")
+sentiment_predict("부모님과는 보면 안될것 같은 영화")
+sentiment_predict("오~~")
+sentiment_predict("잘하는 짓이다")
+
 
 
 
