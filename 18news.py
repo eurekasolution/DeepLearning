@@ -57,7 +57,15 @@ print("5-1 제목 최대 길이(Train Data) : ", max(len(length) for length in x
 print("5-2 제목 평균 길이(Train Data) : {:.2f}".format(sum(map(len, x_train))/len(x_train)))
 
 print("5-3 길이 분포도(Train Data)")
-plt.hist([len(s) for s in x_train], bins=50)
+#plt.hist([len(s) for s in x_train], bins=50)
+#plt.xlabel("Length of Data")
+#plt.ylabel("# of Data")
+#plt.show()
+
+print("5-4 제목 최대 길이(Test Data) : ", max(len(length) for length in x_test))
+print("5-5 제목 평균 길이(Test Data) : {:.2f}".format(sum(map(len, x_test))/len(x_test)))
+print("5-6 길이 분포도(Test Data)")
+plt.hist([len(s) for s in x_test], bins=50)
 plt.xlabel("Length of Data")
 plt.ylabel("# of Data")
 plt.show()
