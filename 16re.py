@@ -195,7 +195,7 @@ history = model.fit(x_train, y_train, epochs=15,
 model.save("d:/ai/model/my_model")
 print("\nAccuracy: {:.4f}".format(model.evaluate(x_train, y_train)[1]))
 print("[11] 정확도 측정")
-loaded_model = load_model("e:/airesult/model/my_model")
+loaded_model = load_model("d:/ai/model/my_model")
 print("\n[테스트 정확도] : {:.4f} %".format((loaded_model.evaluate(x_test, y_test)[1])))
 
 print("[12] 리뷰 예측")
@@ -213,8 +213,8 @@ def sentiment_predict(new_sentence):
         print("[{}] 부정 리뷰 확률 {:.2f}%".format(org_sentence, (1-score) * 100))
 
 print("[리뷰 예측 테스트]")
-sentiment_predict("주인공 연기 진짜 대단하다. ㅠㅠ")
-sentiment_predict("시간 남아도는 사람만 이 영화 보세요")
+sentiment_predict("주인공 연기가 진짜 대단하다. ㅠㅠ") # 주인공 연기 진짜 대단하다 ㅠㅠ
+sentiment_predict("시간 남아도는 사람만 이 영화 보세요") # 시간 남아도 사람만 이 영화 보세요
 sentiment_predict("각오하고 보니까 의외로 재미는 있다. 멋져버려")
 sentiment_predict("이건 아니지")
 sentiment_predict("다시 또 보고 싶은 영화")
