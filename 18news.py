@@ -43,7 +43,7 @@ print("3-2. Test Data\n", x_test[:5])
 
 print("Step 3. 정수 인코딩")
 from tensorflow.keras.preprocessing.text import Tokenizer
-max_words = 50000
+max_words = 1000 # 50000
 tokenizer = Tokenizer(num_words = max_words)
 tokenizer.fit_on_texts(x_train)
 x_train = tokenizer.texts_to_sequences(x_train)
@@ -52,4 +52,7 @@ print("4. 정수화 데이터 확인")
 print("4-1. Train Data\n", x_train[:5])
 print("4-2. Test Data\n", x_test[:5])
 
+print("5. 패딩을 위한 최대길이, 평균길이 분포 확인")
+print("5-1 제목 최대 길이(Train Data) : ", max(len(length) for length in x_train))
+print("5-2 제목 평균 길이(Train Data) : {:.2f}".format(sum(map(len, x_train))/len(x_train)))
 
