@@ -125,3 +125,14 @@ print("[빈 샘플 삭제 수행]")
 x_train = np.delete(x_train, drop_train, axis=0)
 y_train = np.delete(y_train, drop_train, axis=0)
 
+print("[x_train, y_train 길이 검사] ", len(x_train), " , ", len(y_train))
+
+print("[08] Padding - 서로 다른 길이 샘플 길이 동일하게!!")
+print("[리뷰 최대 길이] : ", max(len(length) for length in x_train))
+print("[리뷰 평균 길이] : {:.2f}".format(sum(map(len, x_train))/len(x_train)) )
+
+print("[분포도] - Histogram")
+plt.hist([len(s) for s in x_train], bins=50)
+plt.xlabel("Length of Samples")
+plt.ylabel("Number of Samples")
+plt.show()
