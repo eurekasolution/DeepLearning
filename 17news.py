@@ -24,10 +24,10 @@ from tqdm import tqdm
 df_labels = []
 df_titles = []
 
-for k in tqdm(range(15)):  # 1 당 10개의 뉴스를 크롤링한다. 1은 페이지 수
+for k in tqdm(range(100)):  # 1 당 10개의 뉴스를 크롤링한다. 1은 페이지 수
     num = k * 10 + 1
     # 삼성전자
-    url = "https://search.naver.com/search.naver?&where=news&query=삼성전자&start=" + str(num)
+    url = "https://search.naver.com/search.naver?&where=news&query=맘스터치&start=" + str(num)
     print("URL = ",url)
     req = requests.get(url)
     soup = BeautifulSoup(req.text, 'html.parser')
@@ -67,6 +67,6 @@ print("----- df_title_df = \n", my_dataframe)
 
 # save to csv
 print("7. Save to CSV")
-my_dataframe.to_csv("d:/ai/momstouchx.csv", index=False, encoding="utf-8-sig", header=True)
+my_dataframe.to_csv("d:/ai/moms.csv", index=False, encoding="utf-8-sig", header=True)
 
 print("End of Program !!!")
