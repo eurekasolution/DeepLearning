@@ -193,3 +193,7 @@ history = model.fit(x_train, y_train, epochs=15,
                     validation_split=0.2)
 
 
+
+
+
+
