@@ -36,3 +36,23 @@ print("중복 제거 :")
 train.drop_duplicates(subset=['document'], inplace=True)
 print("중복 제거후 데이터수 :", len(train))
 print("빈 데이터 수 : ",train.isnull().sum())
+print("빈 데이터 있으면 삭제")
+train = train.dropna(how='any');
+
+print("04... 정규식 이용해 정제") # 한글, 공백제외한 나머지 삭제 a->""
+train['document'] = train['document'].str.replace("[^가-힣ㄱ-ㅎㅏ-ㅣ ]", "", regex=True)
+print("정규식 제거후 데이터 :", train[0:10])
+# S    가나다
+# S가나    다 , 문장이 시작하자 마자 공백이 있으면 제거
+train['document'] = train['document'].str.replace("^ +", "", regex=True)
+train['document'] = train['document'].str.replace("  ", "", regex=True)
+train['document'].replace('', np.nan, inplace=True)
+
+test['document'] = test['document'].str.replace("[^가-힣ㄱ-ㅎㅏ-ㅣ ]", "", regex=True)
+test = test.dropna(how='any');
+# S    가나다
+# S가나    다 , 문장이 시작하자 마자 공백이 있으면 제거
+test['document'] = test['document'].str.replace("^ +", "", regex=True)
+test['document'] = test['document'].str.replace("  ", "", regex=True)
+test['document'].replace('', np.nan, inplace=True)
+print("정규식 제거후 데이터(Test) :", test[0:10])
