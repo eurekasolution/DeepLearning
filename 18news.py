@@ -118,3 +118,13 @@ model.compile(optimizer='adam',  #optimizer='rmsprop'
 history = model.fit(x_train, y_train, epochs=10, batch_size=10, validation_split=0.1)
 
 print("\n6. 테스트 정확도 : {:.2f}%".format(model.evaluate(x_test, y_test)[1] * 100))
+
+print("Step 5. 예측")
+predict = model.predict(x_test)
+
+predict_labels = np.argmax(predict, axis=1)
+original_labels = np.argmax(y_test, axis=1)
+
+for i in range(30):
+    print("기사제목 : ", test_data['title'].iloc[i], "\t원라벨 : ", original_labels[i], "\t예측값 :", predict_labels[i])
+
