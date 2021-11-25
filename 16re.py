@@ -132,7 +132,25 @@ print("[리뷰 최대 길이] : ", max(len(length) for length in x_train))
 print("[리뷰 평균 길이] : {:.2f}".format(sum(map(len, x_train))/len(x_train)) )
 
 print("[분포도] - Histogram")
-plt.hist([len(s) for s in x_train], bins=50)
-plt.xlabel("Length of Samples")
-plt.ylabel("Number of Samples")
-plt.show()
+#plt.hist([len(s) for s in x_train], bins=50)
+#plt.xlabel("Length of Samples")
+#plt.ylabel("Number of Samples")
+#plt.show()
+
+print("[최적의 max_len] - 대부분의 리뷰가 잘리지 않도록 하는 최적의 길이")
+def below_threshold_len(max_len, nested_list):
+    count = 0
+    for sentence in nested_list:
+        if(len(sentence) <= max_len):
+            count = count + 1
+    print("[전체 샘플 중 길이가 {:d} 이하인 샘플 비율 {:.2f} %".format(max_len, (count/len(nested_list))*100))
+
+max_len = 30
+below_threshold_len(max_len, x_train)
+print("[최적의 max_len] 구할 때는 이렇게 해야한다.")
+for i in range(5, 100, 5):
+    below_threshold_len(i, x_train)
+
+print("[Padding] max_len = ", max_len)
+x_train = pad_sequences(x_train, maxlen=max_len)
+x_test = pad_sequences(x_test, maxlen=max_len)
