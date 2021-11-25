@@ -71,6 +71,12 @@ for sentence in tqdm(train['document']):
     stopwords_removed_sentence = [ word for word in tokenized_sentence if not word in stopwords]
     x_train.append(stopwords_removed_sentence)
 
+x_test = []
+for sentence in tqdm(test['document']):
+    tokenized_sentence = okt.morphs(sentence, stem=True)
+    stopwords_removed_sentence = [ word for word in tokenized_sentence if not word in stopwords]
+    x_test.append(stopwords_removed_sentence)
+
 print("type(x_train) = ", type(x_train))
 print(x_train[0:10])
 
@@ -112,3 +118,10 @@ print("[After] x_train \n",x_train[:3])
 
 y_train = np.array(train['label'])
 y_test = np.array(test['label'])
+
+print("[07] Remove Empty Samples : 출현빈도 적은 데이터로만 된 데이터는 빈 데이터!!!")
+drop_train = [ index for index, sentence in enumerate(x_train) if len(sentence) <1]
+print("[빈 샘플 삭제 수행]")
+x_train = np.delete(x_train, drop_train, axis=0)
+y_train = np.delete(y_train, drop_train, axis=0)
+
