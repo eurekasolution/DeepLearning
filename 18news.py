@@ -18,3 +18,21 @@ print("Test Data\n",test_data.groupby('label').size().reset_index(name='count'))
 print("Step 2. 모델만들기 전처리")
 print("2-1. 토큰화")
 stopwords = ['의', '가', '이', '은', '들', '는', '좀', '잘', '걍', '과', '도', '를', '으로', '에', '와', '한', '하다']
+
+import konlpy
+from konlpy.tag import Okt
+
+okt = Okt()
+x_train = []
+for sentence in train_data['title']:
+    temp_x = []
+    temp_x = okt.morphs(sentence, stem=True)
+    temp_x = [word for word in temp_x if not word in stopwords]
+    x_train.append(temp_x)
+
+x_test = []
+for sentence in test_data['title']:
+    temp_x = []
+    temp_x = okt.morphs(sentence, stem=True)
+    temp_x = [word for word in temp_x if not word in stopwords]
+    x_test.append(temp_x)
