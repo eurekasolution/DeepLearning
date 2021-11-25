@@ -17,8 +17,8 @@ def read_data(filename):
 #10265843	터너무재밓었다그래서보는것을추천한다	0
 
 print("01... 데이터 파일 읽기")
-train = read_data("d:/ai/ratings_train.txt")
-test = read_data("d:/ai/ratings_test.txt")
+train = read_data("d:/ai/simple_train.txt") # simple_train.txt (15만개->1만개)
+test = read_data("d:/ai/simple_test.txt")   # simple_test.txt
 
 print("02... Tokenize")
 from konlpy.tag import Okt
@@ -67,6 +67,6 @@ from matplotlib import font_manager, rc
 
 font_name ="C:/Windows/Fonts/malgun.ttf"
 font_name = font_manager.FontProperties(fname=font_name).get_name()
-plt.rc('font', family=font_name)
-plt.figure(figsize=(20, 20))
-text.plot(50)
+#plt.rc('font', family=font_name)
+#plt.figure(figsize=(20, 20))
+#text.plot(50)
