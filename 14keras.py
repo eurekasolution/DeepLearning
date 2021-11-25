@@ -73,3 +73,13 @@ font_name = font_manager.FontProperties(fname=font_name).get_name()
 
 print("05.. 단어 수를 제한")
 selected_words = [f[0] for f in text.vocab().most_common(1000)]
+
+print("06... 데이터 출현 빈도별 분포")
+def term_frequency(doc):
+    return [doc.count(word) for word in selected_words]
+
+train_x = [term_frequency(d) for d, _ in train_pos]
+test_x = [term_frequency(d) for d, _ in test_pos]
+train_y = [c for _, c in train_pos]
+test_y = [c for _, c in test_pos]
+
