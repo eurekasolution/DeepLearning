@@ -73,3 +73,26 @@ for sentence in tqdm(train['document']):
 
 print("type(x_train) = ", type(x_train))
 print(x_train[0:10])
+
+print("06... Embedding")
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(x_train)
+print("토큰 워드 인덱스 : ", tokenizer.word_index)
+
+threshold = 2 # 3, 1
+total_cnt = len(tokenizer.word_index)
+print("total cnt = ", total_cnt)
+rare_cnt = 0
+total_frequency = 0
+rare_frequency = 0
+
+for key, value in tokenizer.word_counts.items():
+    total_frequency = total_frequency + value
+
+    if(value < threshold):
+        rare_cnt = rare_cnt +1
+        rare_frequency = rare_frequency + value
+
+print("[단어수] : ", total_cnt)
+print("출현빈도 %s 번 이하인 단어수 : %s"%(threshold -1, rare_cnt))
+print("희귀 집합 단어 비율 = {:.2f}%".format((rare_cnt / total_cnt) * 100))
