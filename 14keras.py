@@ -83,3 +83,27 @@ test_x = [term_frequency(d) for d, _ in test_pos]
 train_y = [c for _, c in train_pos]
 test_y = [c for _, c in test_pos]
 
+print("-"*80)
+print("length train_x : ", len(train_x))
+print("train_x[0:10] : ", train_x[0:10])
+print("length train_y : ", len(train_y))
+
+import numpy as np
+
+x_train = np.asarray(train_x).astype('float32')
+x_test = np.asarray(test_x).astype('float32')
+y_train = np.asarray(train_y).astype('float32')
+y_test = np.asarray(test_y).astype('float32')
+
+print("07 ... Modeling")
+from tensorflow.keras.preprocessing import sequence
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.layers import Dense, Embedding, LSTM
+from tensorflow.keras.datasets import imdb
+
+model = Sequential()
+model.add(Dense(64, activation='relu', input_shape=(1000, )))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+
+
