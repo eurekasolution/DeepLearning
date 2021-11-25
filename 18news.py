@@ -56,3 +56,8 @@ print("5. 패딩을 위한 최대길이, 평균길이 분포 확인")
 print("5-1 제목 최대 길이(Train Data) : ", max(len(length) for length in x_train))
 print("5-2 제목 평균 길이(Train Data) : {:.2f}".format(sum(map(len, x_train))/len(x_train)))
 
+print("5-3 길이 분포도(Train Data)")
+plt.hist([len(s) for s in x_train], bins=50)
+plt.xlabel("Length of Data")
+plt.ylabel("# of Data")
+plt.show()
