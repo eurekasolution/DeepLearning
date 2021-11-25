@@ -106,4 +106,19 @@ model.add(Dense(64, activation='relu', input_shape=(1000, )))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
+print("08... Compile")
+model.compile(loss='binary_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+print("09... Learning")
+model.fit(x_train,
+          y_train,
+          batch_size=128,
+          epochs=5,     # 10, 15
+          validation_data=(x_test, y_test))
+
+loss, acc=model.evaluate(x_test, y_test)
+print("Loss : ", loss)
+print("Acc : ", acc)
 
