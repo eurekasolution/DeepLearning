@@ -115,6 +115,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 max_len = 20
 x_train = pad_sequences(x_train, maxlen=max_len)
 x_test = pad_sequences(x_test, maxlen=max_len)
+x_predict = pad_sequences(x_predict, maxlen=max_len)
 
 model = Sequential()
 model.add(Embedding(max_words, 100))
