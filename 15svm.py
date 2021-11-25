@@ -52,3 +52,11 @@ selected_words = [f[0] for f in text.vocab().most_common(300)]
 def term_exists(doc):
     return {'exists({})'.format(word): (word in set(doc)) for word in selected_words}
 
+train_docs = train_docs[:1000]
+train_xy = [(term_exists(d), c) for d, c in train_docs]
+test_xy = [(term_exists(d), c) for d, c in test_docs]
+
+print("06... Evaluate")
+classifier = SklearnClassifier(LinearSVC())
+classifier_svm = classifier.train(train_xy)
+print(nltk.classify.accuracy(classifier_svm, test_xy))
