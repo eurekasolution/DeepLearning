@@ -137,6 +137,7 @@ print("[분포도] - Histogram")
 #plt.ylabel("Number of Samples")
 #plt.show()
 
+#
 print("[최적의 max_len] - 대부분의 리뷰가 잘리지 않도록 하는 최적의 길이")
 def below_threshold_len(max_len, nested_list):
     count = 0
@@ -145,7 +146,7 @@ def below_threshold_len(max_len, nested_list):
             count = count + 1
     print("[전체 샘플 중 길이가 {:d} 이하인 샘플 비율 {:.2f} %".format(max_len, (count/len(nested_list))*100))
 
-max_len = 30
+max_len = 40
 below_threshold_len(max_len, x_train)
 print("[최적의 max_len] 구할 때는 이렇게 해야한다.")
 for i in range(5, 100, 5):
@@ -154,3 +155,17 @@ for i in range(5, 100, 5):
 print("[Padding] max_len = ", max_len)
 x_train = pad_sequences(x_train, maxlen=max_len)
 x_test = pad_sequences(x_test, maxlen=max_len)
+
+print("[09] Modeling ")
+from tensorflow.keras.models import Sequential,Model, load_model
+from tensorflow.keras.layers import Dense, Embedding, LSTM
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+
+embedding_dim = 100
+hidden_units = 128
+
+model = Sequential()
+model.add(Embedding(voca_size, embedding_dim))
+model.add(LSTM(hidden_units))
+model.add(Dense(1, activation='sigmoid'))
+
