@@ -65,7 +65,36 @@ print("5-3 길이 분포도(Train Data)")
 print("5-4 제목 최대 길이(Test Data) : ", max(len(length) for length in x_test))
 print("5-5 제목 평균 길이(Test Data) : {:.2f}".format(sum(map(len, x_test))/len(x_test)))
 print("5-6 길이 분포도(Test Data)")
-plt.hist([len(s) for s in x_test], bins=50)
-plt.xlabel("Length of Data")
-plt.ylabel("# of Data")
-plt.show()
+#plt.hist([len(s) for s in x_test], bins=50)
+#plt.xlabel("Length of Data")
+#plt.ylabel("# of Data")
+#plt.show()
+
+print("5-7 One-Hot Encoding")
+
+import numpy as np
+
+y_train = []
+y_test = []
+
+for i in range(len(train_data['label'])):
+    if train_data['label'].iloc[i] == 1:
+        y_train.append([0, 0, 1])
+    elif train_data['label'].iloc[i] == 0:
+        y_train.append([0, 1, 0])
+    elif train_data['label'].iloc[i] == -1:
+        y_train.append([0, 0, 1])
+
+for i in range(len(test_data['label'])):
+    if test_data['label'].iloc[i] == 1:
+        y_test.append([0, 0, 1])
+    elif test_data['label'].iloc[i] == 0:
+        y_test.append([0, 1, 0])
+    elif test_data['label'].iloc[i] == -1:
+        y_test.append([0, 0, 1])
+
+y_train = np.array(y_train)
+y_test = np.array(y_test)
+print("5-8 y_train\n",y_train)
+print("5-9 y_test\n",y_test)
+
