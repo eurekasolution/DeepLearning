@@ -114,7 +114,7 @@ model.compile(loss='binary_crossentropy',
 print("09... Learning")
 model.fit(x_train,
           y_train,
-          batch_size=128,
+          batch_size=512,
           epochs=5,     # 10, 15
           validation_data=(x_test, y_test))
 
@@ -122,3 +122,21 @@ loss, acc=model.evaluate(x_test, y_test)
 print("Loss : ", loss)
 print("Acc : ", acc)
 
+def predict_pos_text(text):
+    token = tokenizing(text)
+    freq = term_frequency(token)
+
+    data = np.expand_dims(np.array(freq).astype('float32'), axis=0)
+    score = float(model.predict(data))
+    if(score >0.5):
+        print("[{}] 는 {:.2f}% 확률로 긍정 리뷰입니다.".format(text, score * 100))
+    else:
+        print("[{}] 는 {:.2f}% 확률로 부정 리뷰입니다.".format(text, score * 100))
+
+print("10... Predict")
+predict_pos_text("와 이 영화 정말 재미있다.")
+predict_pos_text("와 이 영화 정말 짜증있다.")
+predict_pos_text("ㅠㅠ 이 영화 ㅠㅠ")
+predict_pos_text("너무 웃겨")
+predict_pos_text("너무 슬퍼")
+predict_pos_text("오~~~")
