@@ -45,3 +45,10 @@ test_docs = [ (tokenizing(row[1]), row[2]) for row in test]
 tokens = [ t for d in train_docs for t in d[0]]
 text = nltk.Text(tokens, name='NMSC')
 print("text[0:5] : ", text[0:5])
+print("Top 10 : ", text.vocab().most_common(10))
+
+print("05... Classify")
+selected_words = [f[0] for f in text.vocab().most_common(300)]
+def term_exists(doc):
+    return {'exists({})'.format(word): (word in set(doc)) for word in selected_words}
+
