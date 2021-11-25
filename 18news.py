@@ -5,6 +5,7 @@ import pandas as pd
 
 train_data = pd.read_csv("d:/ai/news_train.csv", encoding="utf-8")
 test_data = pd.read_csv("d:/ai/news_test.csv", encoding="utf-8")
+predict_data = pd.read_csv("d:/ai/hansol.csv", encoding="utf-8")
 
 import matplotlib.pyplot as plt
 print("Step 1. 데이터 분포 분석")
@@ -37,6 +38,13 @@ for sentence in test_data['title']:
     temp_x = [word for word in temp_x if not word in stopwords]
     x_test.append(temp_x)
 
+x_predict = []
+for sentence in predict_data['title']:
+    temp_x = []
+    temp_x = okt.morphs(sentence, stem=True)
+    temp_x = [word for word in temp_x if not word in stopwords]
+    x_predict.append(temp_x)
+
 print("3. 토근화 확인")
 print("3-1. Train Data\n", x_train[:5])
 print("3-2. Test Data\n", x_test[:5])
@@ -48,6 +56,7 @@ tokenizer = Tokenizer(num_words = max_words)
 tokenizer.fit_on_texts(x_train)
 x_train = tokenizer.texts_to_sequences(x_train)
 x_test = tokenizer.texts_to_sequences(x_test)
+x_predict = tokenizer.texts_to_sequences(x_predict)
 print("4. 정수화 데이터 확인")
 print("4-1. Train Data\n", x_train[:5])
 print("4-2. Test Data\n", x_test[:5])
@@ -120,11 +129,11 @@ history = model.fit(x_train, y_train, epochs=10, batch_size=10, validation_split
 print("\n6. 테스트 정확도 : {:.2f}%".format(model.evaluate(x_test, y_test)[1] * 100))
 
 print("Step 5. 예측")
-predict = model.predict(x_test)
+predict = model.predict(x_predict)
 
 predict_labels = np.argmax(predict, axis=1)
 original_labels = np.argmax(y_test, axis=1)
 
 for i in range(30):
-    print("기사제목 : ", test_data['title'].iloc[i], "\t원라벨 : ", original_labels[i], "\t예측값 :", predict_labels[i])
+    print("기사제목 : ", predict_data['title'].iloc[i], "\t원라벨 : ", original_labels[i], "\t예측값 :", predict_labels[i])
 
