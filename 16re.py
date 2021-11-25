@@ -96,3 +96,19 @@ for key, value in tokenizer.word_counts.items():
 print("[단어수] : ", total_cnt)
 print("출현빈도 %s 번 이하인 단어수 : %s"%(threshold -1, rare_cnt))
 print("희귀 집합 단어 비율 = {:.2f}%".format((rare_cnt / total_cnt) * 100))
+
+print("[출현빈도 %s 미만 데이터 제외]"%(threshold))
+voca_size = total_cnt - rare_cnt +1  # 0번은 제목
+print("[단어 집합의 크기] : " , voca_size)
+
+print("[Convert from Text Sequence to Integer Sequence]")
+print("[Before] x_train \n",x_train[:3])
+tokenizer = Tokenizer(voca_size)
+tokenizer.fit_on_texts(x_train)
+x_train = tokenizer.texts_to_sequences(x_train)
+x_test = tokenizer.texts_to_sequences(x_test)
+print("[x_train type ] : ", type(x_train))
+print("[After] x_train \n",x_train[:3])
+
+y_train = np.array(train['label'])
+y_test = np.array(test['label'])
