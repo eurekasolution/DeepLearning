@@ -140,3 +140,10 @@ predict_pos_text("ㅠㅠ 이 영화 ㅠㅠ")
 predict_pos_text("너무 웃겨")
 predict_pos_text("너무 슬퍼")
 predict_pos_text("오~~~")
+
+print("-"*80)
+print("11... Predict from File")
+ratings_train = read_data("d:/ai/review.txt")
+
+for row in ratings_train[0:100]:
+    predict_pos_text(row[1])
