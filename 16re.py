@@ -169,3 +169,27 @@ model.add(Embedding(voca_size, embedding_dim))
 model.add(LSTM(hidden_units))
 model.add(Dense(1, activation='sigmoid'))
 
+print("[검증 데이터 손실 증가시 학습종료]")
+# 검증 데이터 손실 4회 증가하면 학습 조기종료
+# 검증 데이터 정확도(val_acc)가 이전보다 좋아질 경우에만 모델 저장
+
+MODEL_SAVE_DIR_PATH = "d:/ai/model/"
+if not os.path.exists(MODEL_SAVE_DIR_PATH):
+    os.mkdir(MODEL_SAVE_DIR_PATH)
+
+model_path = MODEL_SAVE_DIR_PATH + '{epoch:02d}-{val_loss:.04f}.hdf5'
+
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=4)
+mc = ModelCheckpoint(filepath=model_path, monitor='val_acc', mode='max', verbos=1, save_best_only=False)
+
+print("[10] 에포크 15회 수행, 훈련데이터중 20%를 검증 데이터로 사용해 정확도 확인")
+model.compile(optimizer='rmsprop',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+
+history = model.fit(x_train, y_train, epochs=15,
+                    callbacks=[es, mc],
+                    batch_size=64,
+                    validation_split=0.2)
+
+
